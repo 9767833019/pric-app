@@ -1,12 +1,35 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState,useEffect } from "react";
 import Image from "next/image";
-// import { redirect } from "next/navigation";
 import { useRouter } from 'next/navigation'
-import Link from "next/link";
+import { db } from "@/firebaseConfig";
+import { getDocs,collection } from "firebase/firestore";
+
+async function fetchfire() {
+  const querysnapshot= await getDocs(collection(db,"user"))
+
+  const data: { id: string; }[]=[];
+  querysnapshot.forEach((doc)=>{
+    data.push({id:doc.id,...doc.data()});
+  })
+  return data;
+}
+
+
 
 
 const Signup: React.FC = () => {
+  const [userData,setUserData]=useState<any[]>([]);
+  
+  useEffect (() => {
+    async function fetchData() {
+    const data = await fetchfire();
+    setUserData(data);
+    }
+    fetchData();
+    }, []);
+
+  
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,7 +47,8 @@ const Signup: React.FC = () => {
     
   };
   const router = useRouter()
-
+  
+ 
   const redirectToAfter = () => {
     router.push('/After');
 };

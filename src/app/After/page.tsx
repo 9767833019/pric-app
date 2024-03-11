@@ -28,9 +28,9 @@ const After: React.FC = () => {
     }, []);
 
   return (
-    <div className="  bg-violet-600 h-auto w-auto p-5 flex justify-center items-center h-screen">
+    <div className="  bg-violet-600  w-auto p-8 flex justify-center items-center h-auto">
     {userData.map((user)=>(
-    <div className="bg-gray-200 h-auto  w-3/4 flex rounded-lg">
+    <div className="bg-gray-200 h-auto w-3/4 flex rounded-lg">
       
         <div  className=" bg-violet-400 w-full h-auto rounded-xl m-5 flex-col shadow hover:shadow-2xl">
         <div className=" flex justify-center">
